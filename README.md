@@ -13,6 +13,10 @@ python3 -m http.server 8000
 
 The page needs to be served over HTTP, because ES modules don't load from `file://`.
 
+## Deploy
+
+Every push to `main` publishes the site to GitHub Pages at https://avdrav1.github.io/parallel-wave-ensemble/ through `.github/workflows/pages.yml`. Only the public site files are published: `index.html`, `privacy.html`, `site.config.js`, `assets/` and `media/`. `docs/` and this README stay off the site, but they're still visible in the public repository.
+
 ## Where things live
 
 | What | Where |
