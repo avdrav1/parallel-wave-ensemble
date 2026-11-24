@@ -138,16 +138,46 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
 /* Hero ------------------------------------------------------------------- */
 
 .hero {
-  padding: clamp(8px, 3vh, 48px) var(--gutter) clamp(40px, 8vh, 96px);
   text-align: center;
   overflow-x: clip;
+}
+.hero__photo { margin: 0; }
+.hero__photo img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 2 / 1; object-fit: cover; object-position: 50% 28%;
+  background: var(--stone);
+}
+.hero__content { padding: clamp(20px, 4vh, 48px) var(--gutter) clamp(40px, 8vh, 96px); }
+@media (min-width: 640px) {
+  /* Wide band: short enough that the headline and booking stay in view. */
+  .hero__photo img { aspect-ratio: auto; height: clamp(220px, 40vh, 420px); }
+}
+
+/* Side by side only when the photo column is wide enough to hold all three players. */
+@media (min-width: 1200px) {
+  .hero {
+    /* A wide photo column keeps the crop close to the photo's own shape,
+       so cello, percussion and violin all stay in frame. */
+    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    min-height: min(calc(100svh - 80px), 760px);
+  }
+  .hero__photo { position: relative; }
+  .hero__photo img {
+    position: absolute; inset: 0; height: 100%;
+    object-position: 22% 40%;
+  }
+  .hero__content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: clamp(32px, 5vh, 64px) clamp(32px, 4vw, 72px);
+  }
 }
 .hero__intro { max-width: 44rem; margin: 0 auto; }
 .eyebrow {
   font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
   color: var(--muted); margin-bottom: .9rem;
 }
-.hero__title { font-size: clamp(2.45rem, 1.5rem + 4.6vw, 5rem); margin-bottom: .35em; }
+.hero__title { font-size: clamp(2.3rem, 1.5rem + 4.2vw, 4.6rem); margin-bottom: .35em; }
+@media (min-width: 960px) { .hero__title { font-size: clamp(2.8rem, 1rem + 3.4vw, 4.6rem); } }
 .hero__lede {
   font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem);
   color: var(--muted); max-width: 30rem; margin: 0 auto 1.4rem;
@@ -156,7 +186,11 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
 
 /* Instrument ------------------------------------------------------------- */
 
-.instrument { margin: clamp(24px, 5vh, 56px) auto 0; max-width: 56rem; }
+.instrument {
+  margin: clamp(20px, 4vh, 48px) auto 0; max-width: 56rem;
+  width: 100%; /* size containment needs an explicit width inside flex/grid */
+  container: instrument / inline-size;
+}
 .no-js .instrument { display: none; }
 
 .instrument__instruction {
@@ -195,10 +229,10 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
 .bowl:nth-child(4) { grid-column: 2 / 4; }
 .bowl:nth-child(5) { grid-column: 4 / 6; transform: translateY(-6px); }
 
-@media (min-width: 720px) {
+@container instrument (min-width: 520px) {
   .bowls {
     display: flex; justify-content: center; align-items: flex-start;
-    gap: clamp(8px, 2vw, 28px);
+    gap: clamp(6px, 1.6cqi, 28px);
     max-width: none; padding: 24px 0 48px;
   }
   /* A loose arc: outer bowls higher, a little irregular. */
@@ -225,8 +259,8 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
   touch-action: manipulation;
   user-select: none; -webkit-user-select: none;
 }
-@media (min-width: 720px) {
-  .bowl { --w: calc(var(--size) * clamp(110px, 13vw, 150px)); }
+@container instrument (min-width: 520px) {
+  .bowl { --w: calc(var(--size) * clamp(84px, 17cqi, 150px)); }
 }
 
 .bowl__body {
@@ -292,10 +326,11 @@ input[type="range"] {
 .about__text { max-width: var(--measure); }
 .about__text p { font-size: 1.12rem; }
 .about__photo { margin: 0; }
-.about__photo img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.about__photo { max-width: 40rem; }
+.about__photo img { display: block; width: 100%; height: auto; }
 .about__photo figcaption { font-size: .8rem; color: var(--muted); margin-top: .5rem; }
 @media (min-width: 900px) {
-  .about:has(.about__photo) { grid-template-columns: minmax(0, 32rem) minmax(0, 28rem); gap: 5rem; }
+  .about:has(.about__photo) { grid-template-columns: minmax(0, 30rem) minmax(0, 40rem); gap: clamp(3rem, 6vw, 6rem); }
 }
 
 /* Excerpt player */
@@ -323,12 +358,27 @@ input[type="range"] {
 .player__credit:empty { display: none; }
 .player__error { margin-top: .8rem; color: var(--error); }
 
+/* Interlude: a quiet full-width image, no text over it */
+.interlude { margin: 0; }
+.interlude img {
+  display: block; width: 100%; height: clamp(260px, 62vh, 680px);
+  object-fit: cover; object-position: 50% 62%;
+  background: var(--mist);
+}
+
 /* Booking */
 .booking {
   display: grid; gap: 2.5rem; justify-content: center;
   grid-template-columns: minmax(0, 40rem);
 }
 .booking__intro p { font-size: 1.12rem; }
+.booking__leaf { display: none; }
+@media (min-width: 960px) {
+  .booking__leaf {
+    display: block; width: 100%; height: auto; margin-top: 3rem;
+    aspect-ratio: 4 / 5; object-fit: cover;
+  }
+}
 .fine { font-size: .9rem; color: var(--muted); }
 .booking__intro .fine { font-size: .9rem; }
 @media (min-width: 960px) {
@@ -371,8 +421,14 @@ input:focus-visible, textarea:focus-visible { outline-offset: 1px; border-color:
 .form__status strong { font-weight: 600; }
 
 /* Newsletter */
-.newsletter { background: var(--mist); }
+.newsletter { background: var(--mist); display: grid; gap: 2.5rem; justify-content: center; align-items: center; }
 .newsletter__inner { max-width: 34rem; margin: 0 auto; text-align: center; }
+.newsletter__photo { margin: 0 auto; max-width: 40rem; }
+.newsletter__photo img { display: block; width: 100%; height: auto; }
+@media (min-width: 900px) {
+  .newsletter { grid-template-columns: minmax(0, 36rem) minmax(0, 30rem); gap: clamp(3rem, 6vw, 6rem); }
+  .newsletter__inner { text-align: left; margin: 0; }
+}
 .newsletter h2 { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.5rem); }
 .newsletter .form { text-align: left; margin-top: 1.5rem; }
 .inline-input { display: flex; gap: .6rem; flex-wrap: wrap; }

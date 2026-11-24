@@ -61,6 +61,24 @@ The section stays hidden while `excerpt` is `null`. The audio file loads only wh
 
 **iPhone note:** iOS mutes web audio while the ring/silent switch is set to silent. That respects the visitor's setting, but it can make the bowls seem broken. If the band would rather play through the switch, add `if (navigator.audioSession) navigator.audioSession.type = 'playback';` in `audio-engine.js` before the context is created (Safari 17+).
 
+## Photos
+
+The processed photos are in `assets/img/photos/` (WebP at 640, 1024 and ~1600 px wide), and `assets/img/social-preview.jpg` is the link-sharing image. All of them are made from the originals by:
+
+```sh
+tools/process-photos.sh ~/Downloads   # folder containing the originals
+```
+
+The script applies one muted, warm grade so the photos read as a set, adds light grain to the ensemble shots, and strips all metadata, including any GPS location. To add or replace a photo, edit the `PHOTOS` list at the top of the script. The originals stay out of the repository.
+
+| Photo | Where it appears |
+| --- | --- |
+| `listening` (rooftop, eyes down) | Hero: side by side at 1200 px and wider, a wide band above the text on smaller screens |
+| `rooftop` (percussionist facing the room) | About section and social preview |
+| `lake` | Full-width interlude before Booking (decorative) |
+| `leaf` | Beside the booking text on wide screens only (decorative) |
+| `winter` (the three of you) | Mailing-list section |
+
 ## Analytics
 
 `analytics.send` receives event names only: `instrument_activated` (first bowl only), `booking_form_started`, `booking_inquiry_sent`, `newsletter_signup_sent` and `excerpt_played`. It never receives form contents or email addresses. If analytics is added, mention it on the privacy page.
@@ -68,7 +86,7 @@ The section stays hidden while `excerpt` is `null`. The audio file loads only wh
 ## Before launch
 
 1. Wordmark or logo, final biography, and the About copy confirmed by the band.
-2. An authentic ensemble photograph and credit. There's a commented-out `<figure>` in the About section, and the photo can also serve as `og:image` / `twitter:image` in `index.html`.
+2. Photo credits. Add a `<figcaption>` for each photo once you know who took it, and confirm the band is happy to publish each photo.
 3. A confirmed description of how audience interaction works in person.
 4. The booking destination and mailing-list service (the endpoints in `site.config.js`), plus `contactEmail`.
 5. Final tuning and sound palette, reviewed with the band.

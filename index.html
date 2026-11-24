@@ -7,12 +7,16 @@
   <meta name="description" content="An ethereal, improvised musical experience for cello, violin and percussion, shaped by the people in the room. Book Parallel Wave Ensemble for your gathering.">
   <meta name="theme-color" content="#F5F2EB">
 
-  <!-- Social preview. Add og:image / twitter:image once an approved ensemble photo exists. -->
+  <!-- Social preview -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Parallel Wave Ensemble">
   <meta property="og:title" content="Parallel Wave Ensemble — Music that only happens once">
   <meta property="og:description" content="An ethereal, improvised musical experience for cello, violin and percussion, shaped by the people in the room.">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://avdrav1.github.io/parallel-wave-ensemble/assets/img/social-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cellist, percussionist and violinist performing together on a rooftop.">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -36,6 +40,14 @@
   <main id="main">
     <!-- Hero -->
     <section class="hero" aria-labelledby="hero-title">
+      <figure class="hero__photo">
+        <img srcset="assets/img/photos/listening-640.webp 640w, assets/img/photos/listening-1024.webp 1024w, assets/img/photos/listening-1599.webp 1599w"
+             sizes="(min-width: 1200px) 55vw, 100vw"
+             src="assets/img/photos/listening-1024.webp" width="1599" height="1328" fetchpriority="high"
+             alt="The ensemble playing on a rooftop: a cellist with eyes lowered, a percussionist resting her hands on a frame drum, and a violinist leaning into her bow.">
+      </figure>
+
+      <div class="hero__content">
       <div class="hero__intro">
         <p class="eyebrow">Cello · Violin · Percussion</p>
         <h1 id="hero-title" class="hero__title">Music that only happens once.</h1>
@@ -73,6 +85,7 @@
           </div>
         </div>
       </div>
+      </div>
     </section>
 
     <!-- About the experience -->
@@ -82,14 +95,13 @@
         <p>Cello, violin, and percussion meet in a performance that takes shape as it unfolds. We listen to one another and to the people gathered with us, allowing the music to move with the moment.</p>
         <p>Each performance is an invitation to slow down, listen closely, and share something that will never happen in quite the same way again.</p>
       </div>
-      <!--
-        Add one authentic ensemble photograph when available, e.g.:
-        <figure class="about__photo">
-          <img src="assets/img/ensemble.jpg" width="1200" height="1500" loading="lazy"
-               alt="Describe the players and instruments in the photo">
-          <figcaption>Photo: Credit name</figcaption>
-        </figure>
-      -->
+      <!-- Add a photo credit as <figcaption> once the photographer is confirmed. -->
+      <figure class="about__photo">
+        <img srcset="assets/img/photos/rooftop-640.webp 640w, assets/img/photos/rooftop-1024.webp 1024w, assets/img/photos/rooftop-1600.webp 1600w"
+             sizes="(min-width: 900px) 40vw, 100vw"
+             src="assets/img/photos/rooftop-1024.webp" width="1600" height="1241" loading="lazy" decoding="async"
+             alt="The ensemble performing outdoors on a rooftop: cello, a cluster of hand drums with the percussionist smiling toward the listeners, and violin.">
+      </figure>
     </section>
 
     <!-- Optional live excerpt: shown only when site.config.js has an approved `excerpt`. -->
@@ -113,12 +125,21 @@
       <p class="player__error" role="status" data-excerpt-status></p>
     </section>
 
+    <!-- Interlude -->
+    <figure class="interlude" aria-hidden="true">
+      <img srcset="assets/img/photos/lake-640.webp 640w, assets/img/photos/lake-1024.webp 1024w, assets/img/photos/lake-1440.webp 1440w" sizes="100vw"
+           src="assets/img/photos/lake-1024.webp" width="1440" height="1602" loading="lazy" decoding="async" alt="">
+    </figure>
+
     <!-- Booking -->
     <section id="book" class="section booking" aria-labelledby="book-title">
       <div class="booking__intro">
         <h2 id="book-title">Make room for something unrepeatable.</h2>
         <p>Tell us about your gathering. We’ll explore what a musical experience could look like together.</p>
         <p class="fine">An inquiry starts a conversation. It doesn’t reserve a date or confirm a booking.</p>
+        <img class="booking__leaf" srcset="assets/img/photos/leaf-640.webp 640w, assets/img/photos/leaf-1024.webp 1024w"
+             sizes="(min-width: 960px) 24rem, 0px"
+             src="assets/img/photos/leaf-640.webp" width="3024" height="4032" loading="lazy" decoding="async" alt="">
       </div>
 
       <form class="form" data-form="booking" novalidate>
@@ -161,6 +182,12 @@
 
     <!-- Mailing list -->
     <section id="stay-in-touch" class="section newsletter" aria-labelledby="newsletter-title">
+      <figure class="newsletter__photo">
+        <img srcset="assets/img/photos/winter-640.webp 640w, assets/img/photos/winter-1024.webp 1024w, assets/img/photos/winter-1600.webp 1600w"
+             sizes="(min-width: 900px) 40vw, 100vw"
+             src="assets/img/photos/winter-1024.webp" width="1600" height="1200" loading="lazy" decoding="async"
+             alt="The three members of the ensemble smiling together outdoors on a snowy farm at sunset.">
+      </figure>
       <div class="newsletter__inner">
         <h2 id="newsletter-title">Hear about the next gathering.</h2>
         <p>Occasional notes about performances and new music.</p>
