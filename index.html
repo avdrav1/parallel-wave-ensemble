@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parallel Wave Ensemble — Cello, violin and percussion</title>
+  <meta name="description" content="An ethereal, improvised musical experience for cello, violin and percussion, shaped by the people in the room. Book Parallel Wave Ensemble for your gathering.">
+  <meta name="theme-color" content="#F5F2EB">
+
+  <!-- Social preview. Add og:image / twitter:image once an approved ensemble photo exists. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Parallel Wave Ensemble">
+  <meta property="og:title" content="Parallel Wave Ensemble — Music that only happens once">
+  <meta property="og:description" content="An ethereal, improvised musical experience for cello, violin and percussion, shaped by the people in the room.">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="Parallel Wave Ensemble, home">Parallel Wave Ensemble</a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><a href="#about">About</a></li>
+        <li><a class="nav__book" href="#book">Book</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__intro">
+        <p class="eyebrow">Cello · Violin · Percussion</p>
+        <h1 id="hero-title" class="hero__title">Music that only happens once.</h1>
+        <p class="hero__lede">An ethereal, improvised musical experience shaped by the people in the room.</p>
+        <div class="hero__actions">
+          <a class="button" href="#book">Book an experience</a>
+          <a class="text-link" href="#about">Meet the music</a>
+        </div>
+      </div>
+
+      <div class="instrument" data-instrument role="group" aria-labelledby="instrument-instruction">
+        <p id="instrument-instruction" class="instrument__instruction">Touch a bowl. Let it ring.</p>
+
+        <div class="instrument__stage">
+          <div class="instrument__ripples" aria-hidden="true" data-ripples></div>
+          <div class="bowls">
+            <button type="button" class="bowl" data-bowl="0" aria-label="Play bowl one" style="--tint: var(--light-amber); --size: 1"><span class="bowl__glow"></span><span class="bowl__body"></span></button>
+            <button type="button" class="bowl" data-bowl="1" aria-label="Play bowl two" style="--tint: var(--light-lavender); --size: .93"><span class="bowl__glow"></span><span class="bowl__body"></span></button>
+            <button type="button" class="bowl" data-bowl="2" aria-label="Play bowl three" style="--tint: var(--light-silver); --size: .86"><span class="bowl__glow"></span><span class="bowl__body"></span></button>
+            <button type="button" class="bowl" data-bowl="3" aria-label="Play bowl four" style="--tint: var(--light-lavender); --size: .8"><span class="bowl__glow"></span><span class="bowl__body"></span></button>
+            <button type="button" class="bowl" data-bowl="4" aria-label="Play bowl five" style="--tint: var(--light-amber); --size: .74"><span class="bowl__glow"></span><span class="bowl__body"></span></button>
+          </div>
+        </div>
+
+        <div class="instrument__footer">
+          <p class="instrument__status" role="status" data-instrument-status></p>
+          <button type="button" class="text-button" data-instrument-retry hidden>Try again</button>
+          <p class="instrument__muted" data-instrument-muted hidden>Sound is muted</p>
+          <div class="sound-controls" data-sound-controls hidden>
+            <button type="button" class="text-button" data-mute aria-pressed="false">Mute</button>
+            <label class="volume">
+              <span>Volume</span>
+              <input type="range" min="0" max="100" step="1" data-volume>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About the experience -->
+    <section id="about" class="section about" aria-labelledby="about-title">
+      <div class="about__text">
+        <h2 id="about-title">Every room changes the music.</h2>
+        <p>Cello, violin, and percussion meet in a performance that takes shape as it unfolds. We listen to one another and to the people gathered with us, allowing the music to move with the moment.</p>
+        <p>Each performance is an invitation to slow down, listen closely, and share something that will never happen in quite the same way again.</p>
+      </div>
+      <!--
+        Add one authentic ensemble photograph when available, e.g.:
+        <figure class="about__photo">
+          <img src="assets/img/ensemble.jpg" width="1200" height="1500" loading="lazy"
+               alt="Describe the players and instruments in the photo">
+          <figcaption>Photo: Credit name</figcaption>
+        </figure>
+      -->
+    </section>
+
+    <!-- Optional live excerpt: shown only when site.config.js has an approved `excerpt`. -->
+    <section id="listen" class="section excerpt" aria-labelledby="excerpt-heading" data-excerpt hidden>
+      <h2 id="excerpt-heading">A moment from a performance</h2>
+      <p class="excerpt__note">A past moment — every performance is different.</p>
+      <div class="player">
+        <button type="button" class="player__toggle" data-excerpt-toggle aria-label="Play excerpt">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-play"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+        </button>
+        <div class="player__body">
+          <p class="player__title" data-excerpt-title></p>
+          <div class="player__timeline">
+            <input type="range" min="0" max="100" step="0.1" value="0" data-excerpt-seek aria-label="Seek" disabled>
+            <span class="player__time" data-excerpt-time>0:00</span>
+          </div>
+          <p class="player__credit" data-excerpt-credit></p>
+        </div>
+      </div>
+      <p class="player__error" role="status" data-excerpt-status></p>
+    </section>
+
+    <!-- Booking -->
+    <section id="book" class="section booking" aria-labelledby="book-title">
+      <div class="booking__intro">
+        <h2 id="book-title">Make room for something unrepeatable.</h2>
+        <p>Tell us about your gathering. We’ll explore what a musical experience could look like together.</p>
+        <p class="fine">An inquiry starts a conversation. It doesn’t reserve a date or confirm a booking.</p>
+      </div>
+
+      <form class="form" data-form="booking" novalidate>
+        <div class="field">
+          <label for="b-name">Name <span class="req">(required)</span></label>
+          <input id="b-name" name="name" type="text" autocomplete="name" required aria-describedby="b-name-error">
+          <p class="field__error" id="b-name-error" data-error-for="name"></p>
+        </div>
+        <div class="field">
+          <label for="b-email">Email <span class="req">(required)</span></label>
+          <input id="b-email" name="email" type="email" autocomplete="email" required aria-describedby="b-email-error">
+          <p class="field__error" id="b-email-error" data-error-for="email"></p>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="b-when">Preferred date or timeframe</label>
+            <input id="b-when" name="when" type="text" placeholder="e.g. a Saturday in early spring">
+          </div>
+          <div class="field">
+            <label for="b-where">Location</label>
+            <input id="b-where" name="location" type="text" autocomplete="address-level2">
+          </div>
+        </div>
+        <div class="field">
+          <label for="b-message">Tell us about your gathering <span class="req">(required)</span></label>
+          <textarea id="b-message" name="message" rows="5" required aria-describedby="b-message-error"></textarea>
+          <p class="field__error" id="b-message-error" data-error-for="message"></p>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="b-hp">Leave this field empty</label>
+          <input id="b-hp" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form__submit">
+          <button type="submit" class="button" data-submit>Send an inquiry</button>
+        </div>
+        <div class="form__status" role="status" aria-live="polite" data-status></div>
+        <noscript><p class="form__status">This form needs JavaScript to send. Please enable it to send an inquiry.</p></noscript>
+      </form>
+    </section>
+
+    <!-- Mailing list -->
+    <section id="stay-in-touch" class="section newsletter" aria-labelledby="newsletter-title">
+      <div class="newsletter__inner">
+        <h2 id="newsletter-title">Hear about the next gathering.</h2>
+        <p>Occasional notes about performances and new music.</p>
+        <form class="form form--inline" data-form="newsletter" novalidate>
+          <div class="field">
+            <label for="n-email">Email address</label>
+            <div class="inline-input">
+              <input id="n-email" name="email" type="email" autocomplete="email" required aria-describedby="n-email-error n-email-note">
+              <button type="submit" class="button button--quiet" data-submit>Stay in touch</button>
+            </div>
+            <p class="field__error" id="n-email-error" data-error-for="email"></p>
+            <p class="fine" id="n-email-note">We’ll ask you to confirm by email. Unsubscribe anytime. <a href="privacy.html">Privacy</a></p>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label for="n-hp">Leave this field empty</label>
+            <input id="n-hp" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form__status" role="status" aria-live="polite" data-status></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="wordmark wordmark--footer">Parallel Wave Ensemble</p>
+    <p class="footer__contact" data-contact hidden></p>
+    <ul class="footer__social" data-social hidden></ul>
+    <p class="footer__meta"><a href="privacy.html">Privacy</a> · © 2026 Parallel Wave Ensemble</p>
+  </footer>
+</body>
+</html>
