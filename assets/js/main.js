@@ -35,6 +35,18 @@ safely('footer', () => {
   }
 });
 
+safely('composed', () => {
+  const line = document.querySelector('[data-composed]');
+  const c = window.pweComposition;
+  if (!line || !c) return;
+  // With ?tone= (for review) the light isn't the visitor's own, so leave out the clock time.
+  const when = c.chosen
+    ? `the ${c.label}`
+    : `your ${c.label}, at ${c.time.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
+  line.textContent = `This page was arranged for ${when}. It won’t look quite like this again.`;
+  line.hidden = false;
+});
+
 safely('forms', () => import('./forms.js').then((m) => m.initForms(config)));
 
 safely('excerpt', () => {

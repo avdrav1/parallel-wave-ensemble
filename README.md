@@ -95,6 +95,17 @@ node tools/score-marks.mjs
 
 Change a mark's seed in that file to redraw it differently.
 
+## A page composed for each visit
+
+`assets/js/compose.js` runs before the page is first drawn and makes each visit a little different. Nothing moves once the page is showing.
+
+- **Light by time of day**, from the visitor's own clock: morning (5–11) is rosy ivory, afternoon (11–17) the original ivory, evening (17–21) apricot and lavender, and night cool moonlit lavender-blue. Each time of day has its own background, its own five bowl lights, and a faint wash over the photos. The palettes are the `:root[data-tone=…]` blocks at the top of `assets/css/styles.css`. Every text colour passes WCAG AA on every background.
+- **A fresh arrangement of the bowls:** the curve of the rising arc, the spacing, the sizes (±5%) and the tints vary on every visit. Bowls always run low to high from left to right, and on phones the two highest stay on the upper row.
+- **A footer line** names the arrangement, for example "This page was arranged for your evening, at 7:42 pm."
+- **Privacy:** the time never leaves the browser, and the privacy page says so.
+
+To review a specific light or arrangement, add `?tone=dawn` (or `day`, `dusk`, `night`) and/or `&seed=123` to the URL. Without JavaScript, the page uses the afternoon light and a fixed arrangement.
+
 ## Analytics
 
 `analytics.send` receives event names only: `instrument_activated` (first bowl only), `booking_form_started`, `booking_inquiry_sent`, `newsletter_signup_sent` and `excerpt_played`. It never receives form contents or email addresses. If analytics is added, mention it on the privacy page.
