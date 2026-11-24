@@ -79,6 +79,22 @@ The script applies one muted, warm grade so the photos read as a set, adds light
 | `leaf` | Beside the booking text on wide screens only (decorative) |
 | `winter` (the three of you) | Mailing-list section |
 
+## Graphic score
+
+The site borrows from graphic notation, where music is written as lines and shapes:
+
+- **Staff:** faint, hand-drawn staff lines sit behind the bowls. The bowls rise with pitch, like notes on a staff: in a rising arc on wide screens, and with the two highest bowls on the upper row on phones.
+- **Ink traces:** each strike draws a thin wave to the right of the bowl, like time moving across a score. Higher bowls draw tighter waves, and the line fades as the note dies away. Traces are random, so no two are alike. They're capped at 10 at once and skipped when reduced motion is on. The code is `addTrace()` in `assets/js/instrument/instrument.js`.
+- **Marks:** the cello is a sustained line, the violin a rising line that settles into vibrato, and the percussion scattered dots. They appear as a key in the About section and combine into one phrase above Booking.
+
+The marks in `assets/img/score/` come from a generator, so they look hand-drawn but are fully reproducible:
+
+```sh
+node tools/score-marks.mjs
+```
+
+Change a mark's seed in that file to redraw it differently.
+
 ## Analytics
 
 `analytics.send` receives event names only: `instrument_activated` (first bowl only), `booking_form_started`, `booking_inquiry_sent`, `newsletter_signup_sent` and `excerpt_played`. It never receives form contents or email addresses. If analytics is added, mention it on the privacy page.

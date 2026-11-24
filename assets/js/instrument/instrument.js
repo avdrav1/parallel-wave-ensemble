@@ -4,6 +4,8 @@ import { announceSoundStart, onOtherSoundStart } from '../sound-bus.js';
 import { track } from '../analytics.js';
 
 const MAX_RIPPLES = 24;
+const MAX_TRACES = 10;
+const SVG_NS = 'http://www.w3.org/2000/svg';
 const FIRST_NOTE_WINDOW = 700; // ms — play the first tap only if audio was ready this quickly
 
 export function initInstrument(root, settings) {
@@ -13,6 +15,7 @@ export function initInstrument(root, settings) {
 
   const bowls = [...root.querySelectorAll('[data-bowl]')];
   const rippleLayer = root.querySelector('[data-ripples]');
+  const traceLayer = root.querySelector('[data-traces]');
   const statusEl = root.querySelector('[data-instrument-status]');
   const retryButton = root.querySelector('[data-instrument-retry]');
   const mutedLabel = root.querySelector('[data-instrument-muted]');
@@ -186,6 +189,54 @@ export function initInstrument(root, settings) {
 
     addRipple(bowl, ringMs * 0.85, 0);
     addRipple(bowl, ringMs * 0.75, 380);
+    addTrace(index, ringMs);
+  }
+
+  // An ink line drawn to the right of the bowl, like time on a score: a wave
+  // that dies away as the note does. Higher bowls draw a tighter wave, and no
+  // two traces are the same.
+  function addTrace(index, duration) {
+    if (!traceLayer) return;
+    const box = traceLayer.getBoundingClientRect();
+    const body = bowls[index].querySelector('.bowl__body').getBoundingClientRect();
+    traceLayer.setAttribute('viewBox', `0 0 ${Math.round(box.width)} ${Math.round(box.height)}`);
+
+    const x0 = body.left - box.left + body.width * 0.8;
+    const y0 = body.top - box.top + body.height * 0.5;
+    const length = Math.max(160, box.width - x0 + 24);
+    const amplitude = body.height * (0.26 + Math.random() * 0.14);
+    const wavelength = 74 - index * 10 + Math.random() * 10;
+    const phase = Math.random() * Math.PI;
+    const driftA = (Math.random() - 0.5) * 10;
+    const driftF = 0.6 + Math.random() * 0.8;
+
+    let d = '';
+    for (let x = 0; x <= length; x += 3) {
+      const t = x / length;
+      const envelope = Math.exp(-3.4 * t) * Math.min(1, x / 12);
+      const y = y0 + amplitude * envelope * Math.sin((2 * Math.PI * x) / wavelength + phase) + driftA * Math.sin(Math.PI * driftF * t);
+      d += `${x ? 'L' : 'M'}${(x0 + x).toFixed(1)} ${y.toFixed(1)}`;
+    }
+
+    const path = document.createElementNS(SVG_NS, 'path');
+    path.setAttribute('class', 'trace');
+    path.setAttribute('d', d);
+    traceLayer.append(path);
+    while (traceLayer.childElementCount > MAX_TRACES) traceLayer.firstElementChild.remove();
+
+    const total = path.getTotalLength();
+    path.style.strokeDasharray = String(total);
+    path.animate([{ strokeDashoffset: total }, { strokeDashoffset: 0 }], {
+      duration: Math.min(2600, duration * 0.32),
+      easing: 'cubic-bezier(.25,.6,.35,1)',
+      fill: 'both',
+    });
+    const fade = path.animate([{ opacity: 0.62 }, { opacity: 0.62, offset: 0.3 }, { opacity: 0 }], {
+      duration,
+      easing: 'ease-in',
+      fill: 'both',
+    });
+    fade.onfinish = () => path.remove();
   }
 
   function addRipple(bowl, duration, delay) {

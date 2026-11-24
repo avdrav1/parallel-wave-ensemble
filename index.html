@@ -62,6 +62,8 @@
         <p id="instrument-instruction" class="instrument__instruction">Touch a bowl. Let it ring.</p>
 
         <div class="instrument__stage">
+          <img class="instrument__staff" src="assets/img/score/staff.svg" alt="" aria-hidden="true">
+          <svg class="instrument__traces" aria-hidden="true" data-traces></svg>
           <div class="instrument__ripples" aria-hidden="true" data-ripples></div>
           <div class="bowls">
             <button type="button" class="bowl" data-bowl="0" aria-label="Play bowl one" style="--tint: var(--light-amber); --size: 1"><span class="bowl__glow"></span><span class="bowl__body"></span></button>
@@ -94,6 +96,11 @@
         <h2 id="about-title">Every room changes the music.</h2>
         <p>Cello, violin, and percussion meet in a performance that takes shape as it unfolds. We listen to one another and to the people gathered with us, allowing the music to move with the moment.</p>
         <p>Each performance is an invitation to slow down, listen closely, and share something that will never happen in quite the same way again.</p>
+        <ul class="score-key" aria-label="The instruments">
+          <li><img src="assets/img/score/cello.svg" alt="" width="600" height="40"><span>Cello</span></li>
+          <li><img src="assets/img/score/violin.svg" alt="" width="600" height="40"><span>Violin</span></li>
+          <li><img src="assets/img/score/percussion.svg" alt="" width="600" height="40"><span>Percussion</span></li>
+        </ul>
       </div>
       <!-- Add a photo credit as <figcaption> once the photographer is confirmed. -->
       <figure class="about__photo">
@@ -133,6 +140,7 @@
 
     <!-- Booking -->
     <section id="book" class="section booking" aria-labelledby="book-title">
+      <img class="score-phrase" src="assets/img/score/phrase.svg" alt="" aria-hidden="true" width="1200" height="90">
       <div class="booking__intro">
         <h2 id="book-title">Make room for something unrepeatable.</h2>
         <p>Tell us about your gathering. We’ll explore what a musical experience could look like together.</p>
