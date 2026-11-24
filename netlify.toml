@@ -1,0 +1,16 @@
+# Netlify: publish only the public site files (not docs/ or the README).
+[build]
+  command = "rm -rf dist && mkdir dist && cp -r index.html privacy.html site.config.js assets dist/ && if [ -d media ]; then cp -r media dist/; fi"
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
