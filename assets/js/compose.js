@@ -16,7 +16,10 @@
   if (!chosen) {
     tone = hour >= 5 && hour < 11 ? 'dawn' : hour >= 11 && hour < 17 ? 'day' : hour >= 17 && hour < 21 ? 'dusk' : 'night';
   }
-  var label = { dawn: 'morning', day: 'afternoon', dusk: 'evening', night: 'night' }[tone];
+  // The words follow the clock; the light buckets above are a little wider.
+  var label = chosen
+    ? { dawn: 'morning', day: 'afternoon', dusk: 'evening', night: 'night' }[tone]
+    : hour >= 5 && hour < 12 ? 'morning' : hour >= 12 && hour < 17 ? 'afternoon' : hour >= 17 && hour < 21 ? 'evening' : 'night';
 
   var seed = Number(params.get('seed')) >>> 0;
   if (!seed) {

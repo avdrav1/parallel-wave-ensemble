@@ -1,3 +1,11 @@
+/* Hallmark · checked: 2026-11-24 · genre: atmospheric (inferred) · job: book
+ * floor: 0 FAIL · fixed: 7 (6a, 19, 34, 39a, 40, 48, 54/63/67) · structural: 2 printed (6b, 44c)
+ * built: the project · redesign: polish · v2.0.0 */
+/* Hallmark · waive 85 · the user asked for the sign-up: the band spec lists the mailing list as the closing section · the booking form sits directly above it */
+/* Hallmark · waive 49b · the band's full name, two lines at 320px only · Parallel Wave Ensemble is the wordmark and cannot be shortened */
+/* Hallmark · answered F14 · errors appear only after a submit attempt, all at once, and focus moves to the first one; reserving a line under every field left uneven gaps in the booking form */
+/* Hallmark · dismissed kept-figure · "9:24am" is the visit time in the footer line, written fresh on every load from the visitor’s clock */
+
 /* Parallel Wave Ensemble */
 
 @font-face {
@@ -25,6 +33,19 @@
   --line: #CFC8BA;
   --error: #8A2E2A;          /* 7.4:1 on ivory */
   --focus: #3F5D6B;
+  --ink-deep: #1F2525;       /* button hover */
+  --field: #FBFAF6;
+  --field-edge: #75716A;     /* 3.6:1 or more on every surface, every tone */
+  --placeholder: #6E7575;    /* 4.5:1 on the field */
+  --error-wash: #F3E3DF;
+  --mask: #000;              /* opaque stop for mask gradients, never painted */
+  --highlight: 255 255 255;  /* RGB triplets for the bowls' light and shade */
+  --shade: 45 52 52;
+
+  /* Surfaces for each time of day; the [data-tone] blocks below pick from these. */
+  --dawn-ivory: #F8EEEA; --dawn-stone: #F1E0D9; --dawn-mist: #E3E6F0;
+  --dusk-ivory: #F6EADD; --dusk-stone: #EED9C6; --dusk-mist: #E9DDEA;
+  --night-ivory: #ECEBF2; --night-stone: #DFDCEA; --night-mist: #D9E0EC;
 
   /* The five bowl lights for the current time of day (RGB triplets). */
   --tone-1: 232 196 140;   /* amber */
@@ -44,7 +65,7 @@
 /* Light by time of day — set on <html data-tone> by assets/js/compose.js.
    "day" is the default above. Text stays charcoal; every surface stays light. */
 :root[data-tone="dawn"] {
-  --ivory: #F8EEEA; --stone: #F1E0D9; --mist: #E3E6F0;
+  --ivory: var(--dawn-ivory); --stone: var(--dawn-stone); --mist: var(--dawn-mist);
   --photo-wash: 255 168 160; --photo-wash-amount: .26;
   --tone-1: 238 196 186;  /* rose */
   --tone-2: 242 208 170;  /* peach */
@@ -53,7 +74,7 @@
   --tone-5: 238 216 160;  /* first-light gold */
 }
 :root[data-tone="dusk"] {
-  --ivory: #F6EADD; --stone: #EED9C6; --mist: #E9DDEA;
+  --ivory: var(--dusk-ivory); --stone: var(--dusk-stone); --mist: var(--dusk-mist);
   --photo-wash: 255 150 60; --photo-wash-amount: .26;
   --tone-1: 228 174 114;  /* deep amber */
   --tone-2: 184 168 218;  /* lavender */
@@ -62,7 +83,7 @@
   --tone-5: 234 192 124;  /* low-sun gold */
 }
 :root[data-tone="night"] {
-  --ivory: #ECEBF2; --stone: #DFDCEA; --mist: #D9E0EC;
+  --ivory: var(--night-ivory); --stone: var(--night-stone); --mist: var(--night-mist);
   --photo-wash: 80 96 196; --photo-wash-amount: .3;
   --tone-1: 214 220 234;  /* moon silver */
   --tone-2: 188 178 226;  /* lavender */
@@ -73,7 +94,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; scrollbar-color: var(--muted) var(--stone); }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -86,7 +107,10 @@ body {
   font-size: 1.0625rem;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  caret-color: var(--charcoal);
 }
+::selection { background: var(--charcoal); color: var(--ivory); }
 
 h1, h2 {
   font-family: var(--serif);
@@ -155,8 +179,10 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
   text-decoration: none; cursor: pointer;
   transition: background-color .3s ease, color .3s ease;
 }
-.button:hover { background: #1F2525; }
-.button[disabled], .button[aria-disabled="true"] { opacity: .65; cursor: progress; }
+.button:hover { background: var(--ink-deep); }
+.button[disabled], .button[aria-disabled="true"] {
+  background: var(--stone); color: var(--muted); border-color: var(--line); cursor: progress;
+}
 .button--quiet { background: transparent; color: var(--charcoal); }
 .button--quiet:hover { background: var(--charcoal); color: var(--ivory); }
 
@@ -183,7 +209,7 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
 .hero__content { padding: clamp(20px, 4vh, 48px) var(--gutter) clamp(40px, 8vh, 96px); }
 @media (min-width: 640px) {
   /* Wide band: short enough that the headline and booking stay in view. */
-  .hero__photo img { aspect-ratio: auto; height: clamp(220px, 40vh, 420px); }
+  .hero__photo img { aspect-ratio: auto; height: clamp(220px, 40svh, 420px); }
 }
 
 /* Side by side only when the photo column is wide enough to hold all three players. */
@@ -205,15 +231,12 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
   }
 }
 .hero__intro { max-width: 44rem; margin: 0 auto; }
-.eyebrow {
-  font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: .9rem;
-}
 .hero__title { font-size: clamp(2.3rem, 1.5rem + 4.2vw, 4.6rem); margin-bottom: .35em; }
 @media (min-width: 960px) { .hero__title { font-size: clamp(2.8rem, 1rem + 3.4vw, 4.6rem); } }
 .hero__lede {
   font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem);
   color: var(--muted); max-width: 30rem; margin: 0 auto 1.4rem;
+  text-wrap: balance;
 }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem 1.4rem; }
 
@@ -238,14 +261,14 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
   position: absolute; left: -4%; top: 4%;
   width: 108%; height: 92%;
   pointer-events: none; user-select: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, var(--mask) 12%, var(--mask) 88%, transparent);
+          mask-image: linear-gradient(90deg, transparent, var(--mask) 12%, var(--mask) 88%, transparent);
 }
 .instrument__traces {
   position: absolute; inset: 0; width: 100%; height: 100%;
   overflow: visible; pointer-events: none;
-  -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent 98%);
-          mask-image: linear-gradient(90deg, #000 70%, transparent 98%);
+  -webkit-mask-image: linear-gradient(90deg, var(--mask) 70%, transparent 98%);
+          mask-image: linear-gradient(90deg, var(--mask) 70%, transparent 98%);
 }
 .trace {
   fill: none; stroke: var(--charcoal); stroke-width: 1.3;
@@ -255,8 +278,8 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
 .instrument__ripples {
   position: absolute; inset: -12% -8%;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
-          mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, var(--mask) 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, var(--mask) 55%, transparent 100%);
 }
 .ripple {
   position: absolute; left: 0; top: 0;
@@ -345,12 +368,12 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
   width: var(--w); aspect-ratio: 1.65;
   border-radius: 50%;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 30%, rgb(255 255 255 / .9), transparent 70%),
+    radial-gradient(ellipse 70% 55% at 50% 30%, rgb(var(--highlight) / .9), transparent 70%),
     radial-gradient(ellipse 100% 100% at 50% 40%, rgb(var(--tint) / .55), rgb(var(--tint) / .85) 75%, rgb(var(--tint)) 100%);
   box-shadow:
-    inset 0 -8px 16px -6px rgb(45 52 52 / .22),
-    inset 0 2px 4px rgb(255 255 255 / .7),
-    0 14px 22px -16px rgb(45 52 52 / .55);
+    inset 0 -8px 16px -6px rgb(var(--shade) / .22),
+    inset 0 2px 4px rgb(var(--highlight) / .7),
+    0 14px 22px -16px rgb(var(--shade) / .55);
   transition: transform .4s ease;
 }
 /* The bowl's opening: a soft inner ellipse near the rim. */
@@ -358,8 +381,8 @@ a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px;
   content: ""; position: absolute;
   left: 9%; right: 9%; top: 9%; height: 46%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 70%, rgb(var(--tint) / .55), rgb(255 255 255 / .55) 80%);
-  box-shadow: inset 0 3px 6px rgb(45 52 52 / .14);
+  background: radial-gradient(ellipse at 50% 70%, rgb(var(--tint) / .55), rgb(var(--highlight) / .55) 80%);
+  box-shadow: inset 0 3px 6px rgb(var(--shade) / .14);
 }
 .bowl__glow {
   position: absolute; left: 50%; top: 50%;
@@ -490,16 +513,17 @@ label { font-size: .95rem; font-weight: 500; }
 input[type="text"], input[type="email"], textarea {
   width: 100%;
   font: inherit; color: inherit;
+  line-height: 1.4;
   padding: .75rem .9rem; min-height: 48px;
-  background: #FBFAF6;
-  border: 1px solid #8F8A80;   /* 3.2:1 against ivory */
+  background: var(--field);
+  border: 1px solid var(--field-edge);
   border-radius: 8px;
 }
 textarea { resize: vertical; min-height: 8rem; }
-input::placeholder, textarea::placeholder { color: #6E7575; }
+input::placeholder, textarea::placeholder { color: var(--placeholder); }
 input:focus-visible, textarea:focus-visible { outline-offset: 1px; border-color: var(--focus); }
 [aria-invalid="true"] { border-color: var(--error) !important; }
-.field__error { color: var(--error); font-size: .9rem; margin: 0; }
+.field__error { color: var(--error); font-size: .9rem; line-height: 1.4; margin: 0; }
 .field__error:empty { display: none; }
 
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -510,7 +534,7 @@ input:focus-visible, textarea:focus-visible { outline-offset: 1px; border-color:
   background: var(--mist); font-size: .98rem;
 }
 .form__status p:last-child { margin: 0; }
-.form__status[data-tone="error"] { background: #F3E3DF; }
+.form__status[data-tone="error"] { background: var(--error-wash); }
 .form__status[data-tone="success"] { background: var(--mist); }
 .form__status strong { font-weight: 600; }
 

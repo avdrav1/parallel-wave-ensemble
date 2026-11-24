@@ -23,7 +23,7 @@ export function initForms(config) {
       submittingLabel: 'Sending…',
       retryLabel: 'Try again',
       notConnected: 'Booking inquiries aren’t connected yet, so this form can’t send. Nothing was submitted.',
-      failure: 'We couldn’t send your inquiry. Your details are still here — please try again.',
+      failure: 'We couldn’t send your inquiry. Your details are still here, so please try again.',
       success: () => ({
         heading: 'Thank you.',
         body: 'We’ve received your inquiry and will be in touch.',
