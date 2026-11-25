@@ -1,6 +1,7 @@
+.cache/
+dist/
 .DS_Store
-*.log
 .env
 .env.*
+*.log
 node_modules/
-dist/

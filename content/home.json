@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Parallel Wave Ensemble: cello, violin and percussion",
+    "description": "An ethereal, improvised musical experience for cello, violin and percussion, shaped by the people in the room. Book Parallel Wave Ensemble for your gathering.",
+    "shareTitle": "Parallel Wave Ensemble: music that only happens once",
+    "shareDescription": "An ethereal, improvised musical experience for cello, violin and percussion, shaped by the people in the room."
+  },
+  "hero": {
+    "title": "Music that only happens once.",
+    "lede": "An ethereal, improvised musical experience for cello, violin, and percussion, shaped by the people in the room.",
+    "bookLabel": "Book an experience",
+    "aboutLabel": "Meet the music",
+    "photo": "content/photos/listening.jpg",
+    "photoAlt": "The ensemble playing on a rooftop: a cellist with eyes lowered, a percussionist resting her hands on a frame drum, and a violinist leaning into her bow."
+  },
+  "about": {
+    "heading": "Every room changes the music.",
+    "text": "Cello, violin, and percussion meet in a performance that takes shape as it unfolds. We listen to one another and to the people gathered with us, allowing the music to move with the moment.\n\nEach performance is an invitation to slow down, listen closely, and share something that will never happen in quite the same way again.",
+    "photo": "content/photos/rooftop.jpg",
+    "photoAlt": "The ensemble performing outdoors on a rooftop: cello, a cluster of hand drums with the percussionist smiling toward the listeners, and violin.",
+    "photoCredit": ""
+  },
+  "excerpt": {
+    "heading": "A moment from a performance",
+    "note": "A past moment. Every performance is different."
+  },
+  "interlude": {
+    "photo": "content/photos/lake.jpg"
+  },
+  "booking": {
+    "heading": "Make room for something unrepeatable.",
+    "intro": "Tell us about your gathering. We’ll explore what a musical experience could look like together.",
+    "smallPrint": "An inquiry starts a conversation. It doesn’t reserve a date or confirm a booking.",
+    "photo": "content/photos/leaf.jpg"
+  },
+  "newsletter": {
+    "heading": "Hear about the next gathering.",
+    "intro": "Occasional notes about performances and new music.",
+    "photo": "content/photos/winter.jpg",
+    "photoAlt": "The three members of the ensemble smiling together outdoors on a snowy farm at sunset."
+  }
+}

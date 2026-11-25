@@ -1,4 +1,5 @@
-# Publishes the public site files (not docs/ or the README) to GitHub Pages.
+# Builds the site from templates/ and content/ (tools/build.mjs) and publishes
+# it to GitHub Pages. Runs on every push to main, including saves from Pages CMS.
 name: Deploy to GitHub Pages
 
 on:
@@ -20,17 +21,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Collect public files
-        run: |
-          mkdir dist
-          cp -r index.html privacy.html site.config.js assets dist/
-          if [ -d media ]; then cp -r media dist/; fi
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Install ImageMagick
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp
+      # Graded photos are reused while the photo and the grade are unchanged,
+      # so a text edit publishes quickly.
+      - uses: actions/cache@v6
+        with:
+          path: .cache/photos
+          key: photos-${{ hashFiles('content/photos/**', 'tools/build.mjs') }}
+          restore-keys: photos-
+      - name: Build
+        run: node tools/build.mjs
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
+    # Branch runs (workflow_dispatch) only check that the site builds.
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:

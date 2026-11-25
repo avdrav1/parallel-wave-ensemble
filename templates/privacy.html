@@ -1,0 +1,45 @@
+<!doctype html>
+<!-- Built by tools/build.mjs from content/privacy.json. Edit the words there (or in Pages CMS), not here. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy: Parallel Wave Ensemble</title>
+  <meta name="description" content="How Parallel Wave Ensemble handles booking inquiries and mailing-list signups.">
+  <meta name="theme-color" content="#F5F2EB">
+  <script src="assets/js/compose.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="./">Parallel Wave Ensemble</a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><a href="./#about">About</a></li>
+        <li><a class="nav__book" href="./#book">Book</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--
+    DRAFT: Before launch, name the actual services used (form handler, email
+    provider, hosting, analytics) and confirm retention with the band.
+  -->
+  <main id="main" class="prose">
+    <h1>Privacy</h1>
+    <p>{{privacy.intro}}</p>
+
+{{sections privacy.sections}}
+
+    <p class="fine">Last updated {{privacy.updated}}.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p class="wordmark wordmark--footer">Parallel Wave Ensemble</p>
+    <p class="footer__meta"><a href="./">Home</a> · © 2026 Parallel Wave Ensemble</p>
+  </footer>
+</body>
+</html>

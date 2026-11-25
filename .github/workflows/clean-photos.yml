@@ -1,0 +1,40 @@
+# Strips metadata (camera details and GPS location) from photos uploaded
+# through Pages CMS and commits the cleaned files back. The published site is
+# always stripped by tools/build.mjs; this keeps the repository's current copy
+# clean too. It can't remove what an earlier commit already contains, so the
+# band should still turn off location before uploading.
+name: Clean uploaded photos
+
+on:
+  push:
+    branches: [main]
+    paths: ['content/photos/**']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clean-photos
+  cancel-in-progress: false
+
+jobs:
+  clean:
+    # Skip its own commit so it can't loop.
+    if: "!contains(github.event.head_commit.message, '[clean-photos]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install exiftool
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libimage-exiftool-perl
+      - name: Strip metadata
+        run: |
+          # Keep the orientation tag so portrait photos stay upright.
+          find content/photos -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+            -exec exiftool -q -overwrite_original -all= -tagsfromfile @ -Orientation {} +
+      - name: Commit cleaned photos
+        run: |
+          if git diff --quiet; then echo "Nothing to clean."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Strip metadata from uploaded photos [clean-photos]"
+          git push

@@ -1,0 +1,124 @@
+# Pages CMS (https://pagescms.org): the band's editing screen for this site.
+# Every save commits to main, and .github/workflows/pages.yml republishes the
+# site in about two minutes. tools/build.mjs checks the same fields, so a
+# change that would break the page stops the publish instead.
+
+media:
+  - name: photos
+    label: Photos
+    input: content/photos
+    output: content/photos
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: audio
+    label: Recordings
+    input: content/audio
+    output: content/audio
+    categories: [audio]
+    rename: safe
+
+settings:
+  commit:
+    identity: user
+
+content:
+  - name: home
+    label: Home page
+    type: file
+    path: content/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Top of the page
+        type: object
+        fields:
+          - { name: title, label: Headline, type: string, required: true, options: { maxlength: 50 }, description: "Short enough to read at a glance: 50 characters at most." }
+          - { name: lede, label: Sentence under the headline, type: text, required: true, options: { maxlength: 180 } }
+          - { name: bookLabel, label: Booking button, type: string, required: true, options: { maxlength: 30 } }
+          - { name: aboutLabel, label: Link to the About section, type: string, required: true, options: { maxlength: 30 } }
+          - { name: photo, label: Photo, type: image, required: true, options: { media: photos }, description: "A wide photo of the three of you playing. It's graded and resized automatically. Turn off location on your phone before uploading (see the note below)." }
+          - { name: photoAlt, label: Photo description, type: text, required: true, options: { maxlength: 300 }, description: "For people who can't see the photo: who is in it and what they're doing, in one sentence." }
+      - name: about
+        label: About
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string, required: true, options: { maxlength: 80 } }
+          - { name: text, label: Text, type: text, required: true, options: { maxlength: 2000 }, description: "Leave an empty line between paragraphs." }
+          - { name: photo, label: Photo, type: image, required: true, options: { media: photos }, description: "Also used as the preview image when someone shares the site." }
+          - { name: photoAlt, label: Photo description, type: text, required: true, options: { maxlength: 300 } }
+          - { name: photoCredit, label: Photo credit, type: string, options: { maxlength: 120 }, description: "Optional, e.g. Photo: Jane Smith" }
+      - name: excerpt
+        label: Recording section
+        type: object
+        description: "Shown only when the recording is turned on under Site and links."
+        fields:
+          - { name: heading, label: Heading, type: string, options: { maxlength: 80 } }
+          - { name: note, label: Note, type: string, options: { maxlength: 200 } }
+      - name: interlude
+        label: Full-width photo before Booking
+        type: object
+        fields:
+          - { name: photo, label: Photo, type: image, required: true, options: { media: photos }, description: "A quiet landscape with no people works best. It's decoration, so it needs no description." }
+      - name: booking
+        label: Booking
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string, required: true, options: { maxlength: 80 } }
+          - { name: intro, label: Text, type: text, required: true, options: { maxlength: 400 } }
+          - { name: smallPrint, label: Small print, type: text, options: { maxlength: 300 } }
+          - { name: photo, label: Side photo (wide screens only), type: image, required: true, options: { media: photos }, description: "A tall detail shot. Decoration, so it needs no description." }
+      - name: newsletter
+        label: Mailing list
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string, required: true, options: { maxlength: 80 } }
+          - { name: intro, label: Text, type: text, required: true, options: { maxlength: 300 } }
+          - { name: photo, label: Photo, type: image, required: true, options: { media: photos } }
+          - { name: photoAlt, label: Photo description, type: text, required: true, options: { maxlength: 300 } }
+      - name: meta
+        label: Search and sharing
+        type: object
+        fields:
+          - { name: title, label: Browser tab title, type: string, required: true, options: { maxlength: 80 } }
+          - { name: description, label: Search result description, type: text, required: true, options: { maxlength: 300 } }
+          - { name: shareTitle, label: Title when shared, type: string, options: { maxlength: 100 }, description: "Optional. Defaults to the browser tab title." }
+          - { name: shareDescription, label: Description when shared, type: text, options: { maxlength: 300 }, description: "Optional. Defaults to the search result description." }
+
+  - name: site
+    label: Site and links
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: contactEmail, label: Contact email, type: string, description: "Shown in the footer, and offered when a form can't send. Leave empty to hide it." }
+      - name: social
+        label: Social links
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Name, type: string, required: true, description: "e.g. Instagram" }
+          - { name: url, label: Web address, type: string, required: true, pattern: { regex: "^https?://", message: "Start with https://" } }
+      - name: excerpt
+        label: Recording
+        type: object
+        fields:
+          - { name: enabled, label: Show the recording on the page, type: boolean, default: false }
+          - { name: audio, label: Audio file, type: file, options: { media: audio }, description: "MP3 or M4A, a few minutes at most. Only upload a recording everyone in it has agreed to publish." }
+          - { name: title, label: Title, type: string, options: { maxlength: 80 } }
+          - { name: credit, label: Credit, type: string, options: { maxlength: 120 }, description: "e.g. Recorded at the Old Mill, March 2026" }
+
+  - name: privacy
+    label: Privacy page
+    type: file
+    path: content/privacy.json
+    format: json
+    fields:
+      - { name: intro, label: Opening paragraph, type: text, required: true }
+      - name: sections
+        label: Sections
+        type: object
+        list: { min: 1 }
+        fields:
+          - { name: heading, label: Heading, type: string, required: true }
+          - { name: text, label: Text, type: text, required: true, description: "Leave an empty line between paragraphs." }
+      - { name: updated, label: Last updated, type: string, required: true, description: "Month and year, e.g. March 2027" }

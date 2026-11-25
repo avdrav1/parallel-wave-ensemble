@@ -1,0 +1,30 @@
+{
+  "intro": "We keep this simple. We only collect what you choose to send us, and we use it only for the reason you sent it.",
+  "sections": [
+    {
+      "heading": "Booking inquiries",
+      "text": "When you send an inquiry, we receive your name, email address, and whatever you tell us about your gathering. We use it to reply and plan a possible performance with you. Sending an inquiry does not add you to our mailing list."
+    },
+    {
+      "heading": "Mailing list",
+      "text": "If you join the mailing list, we store your email address with our email provider to send occasional notes about performances and new music. You’ll be asked to confirm your subscription, and every email includes a link to unsubscribe."
+    },
+    {
+      "heading": "The instrument on our homepage",
+      "text": "The bowls play entirely in your browser. We don’t use your microphone, record what you play, or store your improvisation."
+    },
+    {
+      "heading": "The page’s light and arrangement",
+      "text": "The colours follow the time on your device, and the bowls are arranged a little differently on each visit. This happens entirely in your browser; the time is never sent to us."
+    },
+    {
+      "heading": "Visit statistics",
+      "text": "We may count simple, anonymous events — such as whether a bowl was played or an inquiry was sent — to understand how the site is used. These counts never include what you type into a form or your email address."
+    },
+    {
+      "heading": "Your choices",
+      "text": "You can ask us to see, correct, or delete anything you’ve sent us by replying to any of our emails."
+    }
+  ],
+  "updated": "November 2026"
+}

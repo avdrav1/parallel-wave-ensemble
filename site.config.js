@@ -1,24 +1,25 @@
 /**
- * Parallel Wave Ensemble — site settings.
+ * Parallel Wave Ensemble: technical site settings.
  *
- * Everything the band is likely to change lives here: contact details, links,
- * form destinations, the optional recording, instrument sound, and analytics.
- * Page copy lives directly in index.html and privacy.html so it renders without
- * JavaScript.
+ * The band's own content (page words, photos, contact email, social links and
+ * the excerpt recording) lives in content/ and is edited in Pages CMS.
+ * tools/build.mjs turns content/site.json into assets/js/site-content.js,
+ * which this file reads. What's left here is wiring: form destinations,
+ * instrument sound and analytics.
  *
  * Never put service credentials or API keys in this file — it is public.
  * Point the form endpoints at a service (or your own server function) that
  * keeps credentials on the server.
  */
+import content from './assets/js/site-content.js';
+
 export default {
   bandName: 'Parallel Wave Ensemble',
 
-  // Shown in the footer and offered as an alternative when a form can't send.
-  // Leave empty until the band confirms the address.
-  contactEmail: '',
-
-  // Selected social links, e.g. { label: 'Instagram', url: 'https://instagram.com/…' }
-  social: [],
+  // From content/site.json. Shown in the footer; the email is also offered
+  // when a form can't send.
+  contactEmail: content.contactEmail,
+  social: content.social,
 
   // Booking inquiries. `endpoint` must accept a POST and return a 2xx status
   // only when the inquiry has been accepted. Until it is set, the form says
@@ -36,10 +37,8 @@ export default {
     requiresConfirmation: true, // changes the success message to "check your inbox"
   },
 
-  // Optional live excerpt. Leave null until the band approves an excerpt and
-  // confirms it can be published. Example:
-  // { src: 'media/excerpt.mp3', title: 'Improvisation in D', credit: 'Recorded at …, 2026' }
-  excerpt: null,
+  // Optional live excerpt, from content/site.json (null while it's turned off).
+  excerpt: content.excerpt,
 
   // The playable bowls in the hero. Prototype tuning — review with the band.
   instrument: {
